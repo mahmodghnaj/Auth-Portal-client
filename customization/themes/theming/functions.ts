@@ -39,7 +39,7 @@ module.exports = {
       return input;
     }
 
-    const resultObj = {};
+    const resultObj: any = {};
 
     Object.entries(input).forEach(([rule, value]) => {
       if (colorNames.hasOwnProperty(rule)) {

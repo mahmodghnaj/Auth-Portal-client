@@ -1,7 +1,8 @@
 import { User } from "@/services/auth/type";
 import { BsFillInfoSquareFill } from "react-icons/bs";
 
-function convertToYYYMMDD(isoDateString: string): string {
+function convertToYYYMMDD(isoDateString: string | undefined): string {
+  if (!isoDateString) return "--";
   const originalDate = new Date(isoDateString);
 
   const year = originalDate.getFullYear();

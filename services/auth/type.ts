@@ -24,8 +24,8 @@ export interface User {
   lastName: string;
   email: string;
   status: 1 | 2; // 1  validation email - 2 not validation email yet
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   id: string;
 }
 
