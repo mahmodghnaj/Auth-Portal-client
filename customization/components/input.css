@@ -1,0 +1,81 @@
+.input {
+  @apply border border-base-content border-opacity-0 bg-base-100 rounded-btn text-base;
+  @apply flex-shrink;
+  @apply h-12 px-4 text-sm leading-loose;
+  &[list]::-webkit-calendar-picker-indicator {
+    line-height: 1em;
+  }
+
+  &-bordered {
+    @apply border-base-200;
+  }
+  &:focus {
+    @apply outline outline-2 outline-offset-2 outline-base-content/20;
+  }
+  &-ghost {
+    @apply bg-opacity-5;
+    &:focus {
+      @apply bg-opacity-100 text-base-content;
+      box-shadow: none;
+    }
+  }
+  &-primary {
+    @apply border-primary;
+    &:focus {
+      @apply outline-primary;
+    }
+  }
+  &-secondary {
+    @apply border-secondary;
+    &:focus {
+      @apply outline-secondary;
+    }
+  }
+  &-accent {
+    @apply border-accent;
+    &:focus {
+      @apply outline-accent;
+    }
+  }
+  &-info {
+    @apply border-info;
+    &:focus {
+      @apply outline-info;
+    }
+  }
+  &-success {
+    @apply border-success;
+    &:focus {
+      @apply outline-success;
+    }
+  }
+  &-warning {
+    @apply border-warning;
+    &:focus {
+      @apply outline-warning;
+    }
+  }
+  &-error {
+    @apply border-error;
+    &:focus {
+      @apply outline-error;
+    }
+  }
+  &-disabled,
+  &:disabled,
+  &[disabled] {
+    @apply cursor-not-allowed border-base-200 bg-base-200 text-opacity-20 placeholder-base-content placeholder-opacity-20;
+  }
+  &-xs {
+    @apply h-6 px-2 text-xs leading-relaxed;
+  }
+  &-md {
+    @apply h-12 px-4 text-sm leading-loose;
+  }
+  &-lg {
+    @apply h-16 px-6 text-lg leading-loose;
+  }
+  &-sm {
+    @apply h-8 px-3 text-sm leading-8;
+  }
+}

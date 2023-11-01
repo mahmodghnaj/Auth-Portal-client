@@ -1,0 +1,19 @@
+.divider {
+  @apply my-4 h-4 whitespace-nowrap;
+  @apply flex flex-row items-center self-stretch;
+  &:before {
+    @apply bg-base-content bg-opacity-10;
+  }
+  &:after {
+    @apply bg-base-content bg-opacity-10;
+  }
+  &:not(:empty) {
+    @apply gap-4;
+  }
+  &:before,
+  &:after {
+    content: "";
+    @apply flex-grow;
+    @apply h-0.5 w-full;
+  }
+}

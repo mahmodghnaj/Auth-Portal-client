@@ -1,0 +1,1 @@
+module.exports = {":root,\n[data-theme]":{"backgroundColor":"hsl(var(--b1) / var(--tw-bg-opacity, 1))","color":"hsl(var(--bc) / var(--tw-text-opacity, 1))"},"body,\nhtml":{"height":"100%","margin":"0"},"#__next,\n#root":{"height":"100%"}};
