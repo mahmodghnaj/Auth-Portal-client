@@ -24,7 +24,7 @@ export const requestInterceptor = async (
   if (token) {
     config.headers.set("Authorization", `Bearer ${token}`);
   }
-  await sleep(2000);
+  //await sleep(2000);
   return config;
 };
 
