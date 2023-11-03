@@ -1,4 +1,5 @@
 import { api } from "@/lib/axios/api";
+import Cookies from "js-cookie";
 import { useMutation, useQuery } from "react-query";
 import {
   EmailConfirmBody,
@@ -10,10 +11,12 @@ import {
   RestPasswordBody,
   User,
 } from "./type";
+import { setRefreshToken } from "@/lib/axios/interceptors";
 
 export const useLogin = () =>
   useMutation<LoginResponse, unknown, LoginBody>(["login"], async (body) => {
     const { data } = await api.post("/auth/login", body);
+    setRefreshToken(data.refreshToken);
     return data;
   });
 
@@ -22,6 +25,7 @@ export const useRegister = () =>
     ["register"],
     async (body) => {
       const { data } = await api.post("/auth/register", body);
+      setRefreshToken(data.refreshToken);
       return data;
     }
   );
@@ -60,13 +64,7 @@ export const useInfSession = () =>
   });
 
 export const useMe = () =>
-  useQuery<User>(
-    ["me"],
-    async () => {
-      const { data } = await api.get("/auth/me");
-      return data;
-    },
-    {
-      retry: 0, // Disable automatic retries
-    }
-  );
+  useQuery<User>(["me"], async () => {
+    const { data } = await api.get("/auth/me");
+    return data;
+  });

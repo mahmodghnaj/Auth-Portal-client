@@ -1,8 +1,17 @@
 import useStore from "@/store";
+import Cookies from "js-cookie";
 
-function sleep(ms: number) {
+export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+// If the front-end and back-end are on the same domain,
+// there's no need to store the refresh token in cookies,
+// as the back-end will send the refresh token in a cookie.
+// This function is used for different domain scenarios.
+export const setRefreshToken = (value: string) => {
+  Cookies.set("refreshToken", value, { expires: 365 });
+};
 
 import {
   type AxiosRequestConfig,
@@ -40,6 +49,7 @@ export const errorInterceptor = async (error: AxiosError): Promise<void> => {
     try {
       const { data } = await api.post(`${url}/auth/refresh`);
       useStore.getState().auth.setToken(data.token);
+      setRefreshToken(data.refreshToken);
       return api(config);
     } catch (error) {
       location.reload();
