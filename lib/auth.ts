@@ -2,7 +2,8 @@ import { NextRequest } from "next/server";
 import { cookies } from "next/headers";
 
 export const isAuthenticated = async (request: NextRequest) => {
-  const refreshToken = request.cookies.get("refreshToken");
+  //const refreshToken = request.cookies.get("refreshToken");
+  const refreshToken = request.cookies.get("refresh");
   if (!refreshToken) return null;
   else {
     const infoSession = await getInfoSession();
