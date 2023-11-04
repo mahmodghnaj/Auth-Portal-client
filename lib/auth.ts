@@ -17,10 +17,16 @@ async function getInfoSession() {
     const response = await fetch(`${url}/auth/info-session`, {
       method: "post",
       headers: {
-        Cookie: cookies()
-          .getAll()
-          .map(({ name, value }) => `${name}=${value}`)
-          .join("; "),
+        // If the front-end and back-end are on the same domain,
+        // there's no need to store the refresh token in cookies,
+        // as the back-end will send the refresh token in a cookie.
+        // This function is used for different domain scenarios.
+        ///////////////////////////////////////
+        // Cookie: cookies()
+        //   .getAll()
+        //   .map(({ name, value }) => `${name}=${value}`)
+        //   .join("; "),
+        refresh: cookies().get("refresh")?.value || "",
       },
     });
     const res = await response.json();

@@ -10,7 +10,13 @@ export function sleep(ms: number) {
 // as the back-end will send the refresh token in a cookie.
 // This function is used for different domain scenarios.
 export const setRefreshToken = (value: string) => {
-  Cookies.set("refreshToken", value, { expires: 365 });
+  Cookies.set("refresh", value, { expires: 365 });
+};
+const injectRefreshToken = (config: InternalAxiosRequestConfig) => {
+  const re = Cookies.get("refresh");
+  const isInject = ["/auth/info-session", "/auth/refresh"];
+  if (re && config.url && isInject.includes(config.url))
+    config.headers.set("refresh", re);
 };
 
 import {
@@ -29,6 +35,7 @@ export interface ConsoleError {
 export const requestInterceptor = async (
   config: InternalAxiosRequestConfig
 ): Promise<InternalAxiosRequestConfig> => {
+  injectRefreshToken(config);
   const token = useStore.getState().auth.token;
   if (token) {
     config.headers.set("Authorization", `Bearer ${token}`);
