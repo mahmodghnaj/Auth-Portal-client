@@ -33,6 +33,7 @@ export const useRegister = () =>
 export const useLogout = () =>
   useMutation(["logout"], async () => {
     const { data } = await api.post("/auth/logout");
+    Cookies.remove("refresh"); /// TODO::
     return data;
   });
 
