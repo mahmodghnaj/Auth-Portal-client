@@ -18,17 +18,13 @@ const pathWithoutAuth = [
 // Define an array of public paths
 const publicPath = ["/auth/confirm-email"];
 
+const regexPattern = /^(?!\/(api|_next\/(static|image)|favicon\.ico)).*/;
+
 // Create a middleware factory named "authorization"
 export const authorization: MiddlewareFactory = (next: NextMiddleware) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
-    // Extract the pathname from the request URL
     const pathname = request.nextUrl.pathname;
-
-    // Check if the path is for static assets (e.g., /_next/ or favicon.ico)
-    if (pathname.startsWith("/_next/") || pathname.includes("favicon.ico")) {
-      // Allow these requests to continue without further processing
-      return NextResponse.next();
-    }
+    if (!regexPattern.test(pathname)) return NextResponse.next();
 
     // Check if the user is authenticated
     const isAuth = await isAuthenticated(request);
