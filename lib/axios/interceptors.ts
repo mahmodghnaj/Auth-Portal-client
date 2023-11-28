@@ -1,9 +1,12 @@
 import useStore from "@/store";
 import Cookies from "js-cookie";
 
-export function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+import {
+  type AxiosError,
+  type AxiosResponse,
+  type InternalAxiosRequestConfig,
+} from "axios";
+import { api } from "./api";
 
 // If the front-end and back-end are on the same domain,
 // there's no need to store the refresh token in cookies,
@@ -19,14 +22,6 @@ const injectRefreshToken = (config: InternalAxiosRequestConfig) => {
     config.headers.set("refresh", re);
 };
 
-import {
-  type AxiosRequestConfig,
-  type AxiosError,
-  type AxiosResponse,
-  type InternalAxiosRequestConfig,
-} from "axios";
-import { api } from "./api";
-
 export interface ConsoleError {
   status: number;
   data: unknown;
@@ -40,7 +35,6 @@ export const requestInterceptor = async (
   if (token) {
     config.headers.set("Authorization", `Bearer ${token}`);
   }
-  //await sleep(2000);
   return config;
 };
 
@@ -54,11 +48,18 @@ export const errorInterceptor = async (error: AxiosError): Promise<void> => {
   if (error.response?.status === 401 && url && !config._retry) {
     config._retry = true;
     try {
-      const { data } = await api.post(`${url}/auth/refresh`);
-      useStore.getState().auth.setToken(data.token);
-      setRefreshToken(data.refreshToken);
+      const response = await fetch(`${url}/auth/refresh`, {
+        method: "Post",
+        headers: {
+          refresh: Cookies.get("refresh") || "",
+        },
+      });
+      const res = await response.json();
+      useStore.getState().auth.setToken(res.token);
+      setRefreshToken(res.refreshToken);
       return api(config);
     } catch (error) {
+      Cookies.remove("refresh");
       location.reload();
     }
     await Promise.reject(error);

@@ -15,7 +15,6 @@ const signInSchema = object({
     .min(6, "must be more than 8 characters")
     .max(32, "must be less than 32 characters"),
 });
-
 const Login = () => {
   const router = useRouter();
   const {
@@ -25,8 +24,11 @@ const Login = () => {
   } = useForm<LoginBody>({
     resolver: zodResolver(signInSchema),
   });
-
   const { isLoading, mutate: login, isSuccess } = useLogin();
+  const loginSocial = (type: string) => {
+    window.location.href = process.env.NEXT_PUBLIC_BASE_URL + "/auth/" + type;
+  };
+
   useEffect(() => {
     if (isSuccess) router.push("/");
   }, [isSuccess]);
@@ -42,11 +44,19 @@ const Login = () => {
       >
         <h1 className="text-center text-3xl font-mono">Sign In with</h1>
         <div className="grid  grid-cols-2 gap-3 w-full space-3 mt-6">
-          <button type="submit" className="btn glass capitalize">
+          <button
+            onClick={loginSocial.bind(this, "google")}
+            type="button"
+            className="btn glass capitalize"
+          >
             <FcGoogle size="1.8rem" />
             Google
           </button>
-          <button type="submit" className="btn glass capitalize">
+          <button
+            onClick={loginSocial.bind(this, "github")}
+            type="button"
+            className="btn glass capitalize"
+          >
             <FaGithub size="1.8rem" />
             Github
           </button>

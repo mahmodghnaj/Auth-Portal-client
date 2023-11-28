@@ -13,6 +13,7 @@ const pathWithoutAuth = [
   "/auth/register",
   "/auth/forgot-password",
   "/auth/password-change",
+  "/auth/social",
 ];
 
 // Define an array of public paths
@@ -42,5 +43,6 @@ export const authorization: MiddlewareFactory = (next: NextMiddleware) => {
       const url = new URL(`/`, request.url);
       return NextResponse.redirect(url);
     }
+    return next(request, _next);
   };
 };

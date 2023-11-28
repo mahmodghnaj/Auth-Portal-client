@@ -8,7 +8,7 @@ import Loading from "@/components/loading";
 
 const Page: NextPageWithLayout = () => {
   const { isLoading, mutate: logout, isSuccess } = useLogout();
-  const { data, isSuccess: InfoMe } = useMe();
+  const { data, isSuccess: InfoMe, isLoading: isLoadingUser } = useMe();
   const setUser = selectors.auth.setUser();
   const user = selectors.auth.user();
   useEffect(() => {
@@ -16,6 +16,7 @@ const Page: NextPageWithLayout = () => {
       location.reload();
     }
   }, [isSuccess]);
+
   useEffect(() => {
     if (InfoMe) {
       setUser(data);
@@ -27,7 +28,7 @@ const Page: NextPageWithLayout = () => {
       <div className="w-full h-full flex items-center justify-center">
         <div className="bg-base-100 min-h-min  max-w-xl w-full flex flex-col p-5 rounded-xl shadow-2xl">
           {user && <InfoAccount user={user} />}
-          {(!user || isLoading) && <Loading />}
+          {(!user || isLoadingUser) && <Loading />}
           <button
             className="mt-5 btn btn-primary capitalize "
             onClick={() => logout()}

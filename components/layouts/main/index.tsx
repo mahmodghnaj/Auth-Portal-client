@@ -1,7 +1,6 @@
 import InitialLoading from "@/components/Initial-loading";
 import { useInfSession } from "@/services/auth";
 import { selectors } from "@/store";
-import Image from "next/image";
 import { ReactElement, useEffect } from "react";
 
 type componentProps = {
@@ -10,6 +9,7 @@ type componentProps = {
 const Main = ({ children }: componentProps) => {
   const { isLoading, data, isSuccess } = useInfSession();
   const setToken = selectors.auth.setToken();
+
   useEffect(() => {
     if (isSuccess) {
       setToken(data.token);
