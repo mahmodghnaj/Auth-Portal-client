@@ -27,6 +27,7 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   id: string;
+  socialType: string;
 }
 
 export interface EmailConfirmBody {
