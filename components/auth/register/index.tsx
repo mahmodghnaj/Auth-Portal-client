@@ -71,7 +71,7 @@ const Register = () => {
                 className="input md:mt-3 xs:mt-1 input-primary w-full  input-md"
               />
               <p className="mt-1 text-error font-semibold  text-sm">
-                {errors.email?.message}
+                {errors.firstName?.message}
               </p>
             </div>
             <div>
@@ -82,7 +82,7 @@ const Register = () => {
                 className="input md:mt-3 xs:mt-1 input-primary w-full  input-md"
               />
               <p className="mt-1 text-error font-semibold  text-sm">
-                {errors.email?.message}
+                {errors.lastName?.message}
               </p>
             </div>
           </div>
