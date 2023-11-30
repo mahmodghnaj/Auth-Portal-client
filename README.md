@@ -1,39 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextJs Auth Portal
+
+## Description
+
+NextJs Auth Portal for a typical project.
+
+Demo: <https://auth-portal-alpha.vercel.app/>
+
+Backend: <https://github.com/mahmodghnaj/Auth-Portal-Server>
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
+cp example.env.local .env.local
+
+npm install
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- [x] Next.js
+- [x] TypeScript
+- [x] [Zustand] state management (https://docs.pmnd.rs/zustand/getting-started/introduction).
+- [x] [Tailwindcss](https://tailwindcss.com/).
+- [x] [React Hook Form](https://react-hook-form.com/)
+- [x] React Query
+- [x] Auth (Sign in, Sign up, Reset password, Confirm email, Refresh Token)
+- [x] Multi-Theme Support
+- [x] Auth by Middleware - Server-Side Rendering (SSR)
+- [x] Customization with Tailwind CSS
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Screenshots
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<img width="1552" alt="Sign In" src="/public/assets/1.jpeg">
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<img width="1552" alt="Sign In" src="/public/assets/2.jpeg">
 
-## Learn More
+<img width="1552" alt="Sign In" src="/public/assets/3.jpeg">
 
-To learn more about Next.js, take a look at the following resources:
+<img width="1552" alt="Sign In" src="/public/assets/4.jpeg">
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# Auth-Portal-client
+<img width="1552" alt="Sign In" src="/public/assets/5.jpeg">
